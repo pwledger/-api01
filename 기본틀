@@ -1,0 +1,56 @@
+import sys
+from PyQt5.QtWidgets import *
+from PyQt5.QAxContainer import *
+
+class MyWindow(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setGeometry(300, 300, 800, 600)
+        self.setWindowTitle(" Kiwoom 자동으로 주식 하기 ")
+        # 종목 불러오기 관련 버튼
+        btn1 = QPushButton("조건식 불러오기")
+        btn2 = QPushButton("종목 가져오기")
+        btn3 = QPushButton("종목 검색 시작")
+
+        #메인레이아웃
+        main_layout = QVBoxLayout()
+        button_layout = QHBoxLayout()
+        list_layout = QHBoxLayout()
+
+        # 추가
+        button_layout.addWidget(btn1)
+        button_layout.addWidget(btn2)
+        button_layout.addWidget(btn3)
+
+        vertical_layout_left1 = QVBoxLayout()
+        vertical_layout_left2 = QVBoxLayout()
+
+        # 종목리스트
+        self.label = QLabel("Stock Codes")
+        self.listWidget_stock = QListWidget()
+        vertical_layout_left1.addWidget(self.label)
+        vertical_layout_left1.addWidget(self.listWidget_stock)
+
+        # RSI 값 리스트
+        self.label = QLabel("Stock Codes RSI ")
+        self.listWidget_rsi = QListWidget()
+        vertical_layout_left2.addWidget(self.label)
+        vertical_layout_left2.addWidget(self.listWidget_rsi)
+
+        # 리스트 추가
+        list_layout.addLayout(vertical_layout_left1)
+        list_layout.addLayout(vertical_layout_left2)
+ 
+        main_layout.addLayout(button_layout)
+        main_layout.addLayout(list_layout)
+
+        container = QWidget()
+        container.setLayout(main_layout)
+
+        self.setCentralWidget(container)
+
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+    window = MyWindow()
+    window.show()
+    sys.exit(app.exec_())
